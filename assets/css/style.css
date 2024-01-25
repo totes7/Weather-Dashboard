@@ -1,0 +1,32 @@
+/* General */
+
+.border-rad {
+  border-radius: 5px;
+}
+
+/* Header */
+
+header {
+  background-image: linear-gradient(
+    to right,
+    rgb(45, 110, 252),
+    rgb(54, 1, 54)
+  );
+}
+
+/* Search Section */
+
+#search-input {
+  width: 100%;
+}
+
+#search-button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Weather Section */
+
+#today {
+    border: 2px solid black;
+}
