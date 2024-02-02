@@ -13,6 +13,16 @@ document.addEventListener("DOMContentLoaded", function () {
   let todayHumidity = $("<p>");
   $("#today").append(todayInfo, todayTemp, todayWind, todayHumidity);
 
+  // Load history buttons
+  let btnHistory = [];
+  let savedBtns = localStorage.getItem("SavedButtons");
+  if (savedBtns) {
+    btnHistory = JSON.parse(savedBtns);
+  }
+
+  createButtons();
+
+  // Display weather plus forecast
   function displayWeather(event) {
     event.preventDefault();
 
@@ -26,6 +36,13 @@ document.addEventListener("DOMContentLoaded", function () {
       "&appid=" +
       APIKey +
       "&units=metric";
+
+    // Update local storage
+    if (!btnHistory.includes(searchInput)) {
+      btnHistory.push(searchInput);
+    }
+
+    createButtons();
 
     $("#search-input").val("");
 
@@ -112,21 +129,25 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Create and append buttons
-  function createButton(event) {
-    event.preventDefault();
-    let btnText = $("#search-input").val();
-    let newBtn = $("<button>");
-    newBtn.addClass("btn btn-secondary");
-    newBtn.css({
-      "background-color": "#9e9eaa",
-      "margin-top": "10px",
-      color: "black",
-    });
-    newBtn.text(btnText);
-    $("#history").append(newBtn);
+  function createButtons() {
+    localStorage.setItem("SavedButtons", JSON.stringify(btnHistory));
+    
+    $("#history").empty();
+
+    for (let i = 0; i < btnHistory.length; i++) {
+      
+      let newBtn = $("<button>");
+      newBtn.addClass("btn btn-secondary");
+      newBtn.css({
+        "background-color": "#9e9eaa",
+        "margin-top": "10px",
+        color: "black",
+      });
+      newBtn.text(btnHistory[i]);
+      $("#history").append(newBtn);
+    }
   }
 
-  // Search button event listeners
-  $("#search-button").on("click", createButton);
+  // Search button event listener
   $("#search-button").on("click", displayWeather);
 });
