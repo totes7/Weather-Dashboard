@@ -65,18 +65,18 @@ document.addEventListener("DOMContentLoaded", function () {
         for (let i = 0; i < 5; i++) {
           let newDiv = $("<div>");
           newDiv.attr("id", `day-${i + 1}`);
-          newDiv.addClass("col-2 text-white");
+          newDiv.addClass("col-lg-2 col-sm-12 text-white");
           newDiv.css({
             "background-color": "#17434f",
-            margin: "auto",
+            margin: "10px auto",
             padding: "10px",
           });
           let forecastInfo = $("<div>");
-          let forecastH3 = $("<h3>");
-          forecastH3.attr("id", `h2-${i + 1}`);
+          let forecastH4 = $("<h4>");
+          forecastH4.attr("id", `h4-${i + 1}`);
           let icon = $("<img>");
           icon.attr("id", `i-${i + 1}`);
-          forecastInfo.append(forecastH3, icon);
+          forecastInfo.append(forecastH4, icon);
           let forecastTemp = $("<p>");
           forecastTemp.attr("id", `t-${i + 1}`);
           let forecastWind = $("<p>");
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
           })
           .then(function (data) {
             for (let j = 0; j < data.list.length; j++) {
-              $(`#h2-${j + 1}`).text(
+              $(`#h4-${j + 1}`).text(
                 dayjs()
                   .add(j + 1, "day")
                   .format("DD/MM/YYYY")
