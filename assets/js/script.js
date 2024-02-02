@@ -23,12 +23,10 @@ document.addEventListener("DOMContentLoaded", function () {
   createButtons();
 
   // Display weather plus forecast
-  function displayWeather(event) {
-    event.preventDefault();
+  function displayWeather(searchInput) {
 
     $("#forecast").empty();
 
-    let searchInput = $("#search-input").val();
     let APIKey = "70f1a1888e6f161d93f2afb8a17a7782";
     let queryURL =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -51,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return response.json();
       })
       .then(function (data) {
-        console.log(data);
         todayH2.text(`${data.name} (${dayjs().format("DD/MM/YYYY")})`);
         let iconCode = data.weather[0].icon;
         let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
@@ -109,7 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
             return response.json();
           })
           .then(function (data) {
-            console.log(data);
             for (let j = 0; j < data.list.length; j++) {
               $(`#h2-${j + 1}`).text(
                 dayjs()
@@ -149,5 +145,20 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Search button event listener
-  $("#search-button").on("click", displayWeather);
+  $("#search-button").on("click", function(event) {
+    event.preventDefault();
+
+    let searchInput = $("#search-input").val();
+
+    displayWeather(searchInput);
+  });
+
+  // History buttons event listener
+  $('#history').on('click', '.btn-secondary', function(event) {
+    event.preventDefault();
+
+    let btnCity = $(this).text()
+
+    displayWeather(btnCity);
+  })
 });
