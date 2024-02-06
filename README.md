@@ -37,6 +37,10 @@ Experience instant weather updates with this user-friendly website! Simply enter
 * [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
 * [Markdown](https://en.wikipedia.org/wiki/Markdown)
 
+### API
+
+Here is a link to the [OpenWeatherAPI](https://openweathermap.org/) documentation website.
+
 ## Credits
 
 The HTML code was provided by the Bootcamp Spot instructor team.
